@@ -1,6 +1,6 @@
 class Solution {
     public int maxScore(int[] c, int k) {
-        int n=c.length;
+         int n=c.length;
         int left[]=new int[k+1];
         int right[]=new int[k+1];
         left[0]=0;
@@ -17,6 +17,3 @@ class Solution {
         return max;
     }
 }
-
-
-        
