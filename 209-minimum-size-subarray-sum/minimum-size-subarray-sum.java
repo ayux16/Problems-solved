@@ -4,7 +4,10 @@ class Solution {
         while(j<n){
             sum+=nums[j];
             while(sum>=target){
-                len=Math.min(len,j-i+1);
+                int currLen = j-i+1;
+                if(currLen<len){
+                    len=currLen;
+                }
                 sum-=nums[i];
                 i++;
             }
