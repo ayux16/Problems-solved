@@ -10,7 +10,6 @@ class Solution {
             }
             j++;
         }
-        if(len==n+1) return 0;
-        return len;
+        return len==n+1?0:len;
     }
 }
