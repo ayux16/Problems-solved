@@ -3,7 +3,7 @@ class Solution {
         int n=nums.length;
         int i=0;
         int j=0;
-        int len=Integer.MAX_VALUE;
+        int len=n+1;
         int sum=0;
         while(j<n){
             sum+=nums[j];
@@ -14,7 +14,7 @@ class Solution {
             }
             j++;
         }
-        if(len==Integer.MAX_VALUE) return 0;
+        if(len==n+1) return 0;
         return len;
     }
 }
