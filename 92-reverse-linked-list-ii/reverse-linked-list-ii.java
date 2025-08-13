@@ -33,13 +33,12 @@ class Solution {
         ListNode sublistTail = current;
         ListNode prev = null;
 
-        for (int i = 0; i < right - left + 1; i++) {
-            ListNode nextNode = current.next;
-            current.next = prev;
-            prev = current;
-            current = nextNode;
+        for(int i=0;i<right-left+1;i++){
+            ListNode nextNode =current.next;
+            current.next=prev;
+            prev=current;
+            current=nextNode;
         }
-
         
         prevLeft.next = prev;
         sublistTail.next = current;
