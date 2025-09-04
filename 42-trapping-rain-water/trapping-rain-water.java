@@ -1,23 +1,21 @@
 class Solution {
     public int trap(int[] A) {
         int n=A.length;
-        int i=0;
-        int j=n-1;
-        int left=0;
-        int right=0;
-        int ans=0;
+        int i=0,j=n-1,leftMax=0,rightMax=0;
+        int water=0;
         while(i<j){
-            left=Math.max(left,A[i]);
-            right=Math.max(right,A[j]);
-            if(left<right){
-                ans+=(left-A[i]);
+            leftMax=Math.max(leftMax,A[i]);
+            rightMax=Math.max(rightMax,A[j]);
+
+            if(leftMax<rightMax){
+                water+=leftMax-A[i];
                 i++;
             }
             else{
-                ans+=(right-A[j]);
+                water+=rightMax-A[j];
                 j--;
             }
         }
-        return ans;
+        return water;
     }
 }
