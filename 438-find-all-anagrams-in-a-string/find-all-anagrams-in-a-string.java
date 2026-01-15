@@ -1,3 +1,5 @@
+import utils.ArrayUtils;
+
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
         int ch[]=new int[26];
@@ -11,23 +13,14 @@ class Solution {
             ch[p.charAt(i)-'a']++;
             ch[s.charAt(i)-'a']--;
         }
-        if(allZero(ch)) al.add(0);
+        if(ArrayUtils.allZero(ch)) al.add(0);
         for(int i=m;i<n;i++){
             ch[s.charAt(i)-'a']--;
             ch[s.charAt(i-m)-'a']++;
-            if(allZero(ch)){
+            if(ArrayUtils.allZero(ch)){
                 al.add(i-m+1);
             }
         }
         return al;
     }
-    public boolean allZero(int a[]){
-        for(int n: a){
-            if(n!=0){
-                return false;
-            }
-        }
-        return true;
-    }
-
 }

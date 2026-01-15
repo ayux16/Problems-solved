@@ -1,3 +1,5 @@
+import utils.ArrayUtils;
+
 class Solution {
     public int longestOnes(int[] nums, int k) {
         int ans=0,l=0,count=0;
@@ -11,7 +13,7 @@ class Solution {
                 }
                 l++;
             }
-            ans=Math.max(ans,i-l+1);
+            ans=Math.max(ans,ArrayUtils.windowLength(l,i));
         }
         return ans;
     }

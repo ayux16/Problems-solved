@@ -1,3 +1,5 @@
+import utils.ArrayUtils;
+
 class Solution {
     public int equalSubstring(String s, String t, int maxCost) {
         int n=s.length(),m=t.length(),i=0,j=0,cost=0,len = -1*n*m;
@@ -7,7 +9,7 @@ class Solution {
                 cost-=Math.abs(s.charAt(i)-t.charAt(i));
                 i++;
             }
-            len=Math.max(len,j-i+1);
+            len=Math.max(len,ArrayUtils.windowLength(i,j));
             j++;   
         }
         return len;

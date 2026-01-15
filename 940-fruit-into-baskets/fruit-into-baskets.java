@@ -1,13 +1,15 @@
+import utils.FrequencyMap;
+
 class Solution {
     public int totalFruit(int[] fruits) {
-        HashMap<Integer,Integer> hm=new HashMap<>();
+        FrequencyMap<Integer> freq=new FrequencyMap<>();
         int l=0, ans=0;
         for(int i=0;i<fruits.length;i++){
-            hm.put(fruits[i],hm.getOrDefault(fruits[i],0)+1);
-            if(hm.size()>2){
-                hm.put(fruits[l],hm.get(fruits[l])-1);
-                if(hm.get(fruits[l])==0){
-                    hm.remove(fruits[l]);
+            freq.increment(fruits[i]);
+            if(freq.size()>2){
+                freq.decrement(fruits[l]);
+                if(freq.get(fruits[l])==0){
+                    freq.remove(fruits[l]);
                 }
                 l++;
             }
