@@ -12,6 +12,9 @@ public class ArrayUtils {
      * @return Prefix sum array where pf[i] = sum of nums[0..i]
      */
     public static int[] prefixSum(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
         int n = nums.length;
         int[] pf = new int[n];
         pf[0] = nums[0];

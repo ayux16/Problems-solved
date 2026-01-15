@@ -22,9 +22,12 @@ public class FrequencyMap<K> {
     
     /**
      * Decrement the frequency of a key by 1
+     * Returns the new frequency (0 if key didn't exist)
      */
-    public void decrement(K key) {
-        map.put(key, map.get(key) - 1);
+    public int decrement(K key) {
+        int newValue = map.getOrDefault(key, 0) - 1;
+        map.put(key, newValue);
+        return newValue;
     }
     
     /**
