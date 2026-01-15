@@ -1,34 +1,36 @@
+import utils.FrequencyMap;
+
 class Solution {
     public String minWindow(String s, String t) {
         int n=s.length();
-        HashMap<Character,Integer> hm=new HashMap<>();
+        FrequencyMap<Character> freq=new FrequencyMap<>();
         for(char num: t.toCharArray()){
-            hm.put(num,hm.getOrDefault(num,0)+1);
+            freq.increment(num);
         }
-        int freq=hm.size();
+        int requiredChars=freq.size();
         int l=0;
         int r=0;
         int startIndex=-1;
         int maxWindow=Integer.MAX_VALUE;
         while(r<n){
             char ch=s.charAt(r);
-            if(hm.containsKey(ch)){
-                hm.put(ch,hm.get(ch)-1);
-                if(hm.get(ch)==0){
-                    freq--;
+            if(freq.containsKey(ch)){
+                freq.decrement(ch);
+                if(freq.get(ch)==0){
+                    requiredChars--;
                 }
             }
-            while(freq==0){
+            while(requiredChars==0){
                 int len=r-l+1;
                 if(len<maxWindow){
                     maxWindow=len;
                     startIndex=l;
                 }
                 ch=s.charAt(l);
-                if(hm.containsKey(ch)){
-                    hm.put(ch,hm.get(ch)+1);
-                    if(hm.get(ch)>0){
-                        freq++;
+                if(freq.containsKey(ch)){
+                    freq.increment(ch);
+                    if(freq.get(ch)>0){
+                        requiredChars++;
                     }
                 }
                 l++;

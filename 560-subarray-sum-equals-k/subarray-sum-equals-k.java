@@ -1,19 +1,18 @@
+import utils.ArrayUtils;
+import utils.FrequencyMap;
+
 class Solution {
     public int subarraySum(int[] nums, int k) {
         int n=nums.length;
-        int pf[]=new int[n];
-        pf[0]=nums[0];
-        for(int i=1;i<n;i++){
-            pf[i]=pf[i-1]+nums[i];
-        }
-        HashMap<Integer,Integer> hm=new HashMap<>();
+        int pf[]=ArrayUtils.prefixSum(nums);
+        FrequencyMap<Integer> freq=new FrequencyMap<>();
         int count=0;
-        hm.put(0,1);
+        freq.increment(0);
         for(int i=0;i<n;i++){
-            if(hm.containsKey(pf[i]-k)){
-                count+=hm.get(pf[i]-k);
+            if(freq.containsKey(pf[i]-k)){
+                count+=freq.get(pf[i]-k);
             }
-            hm.put(pf[i],hm.getOrDefault(pf[i],0)+1);
+            freq.increment(pf[i]);
         }
         return count;
     }
