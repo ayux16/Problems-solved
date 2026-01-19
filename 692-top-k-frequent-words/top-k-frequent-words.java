@@ -1,27 +1,26 @@
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-        HashMap<String, Integer> hm=new HashMap<>();
-        for(int i=0;i<words.length;i++){
-            String s=words[i];
+        Map<String,Integer> hm=new HashMap<>();
+        
+        for(String s: words){
             hm.put(s,hm.getOrDefault(s,0)+1);
         }
 
-        PriorityQueue<Map.Entry<String, Integer>> pq =  new PriorityQueue<>((a, b) -> {
-            if (!a.getValue().equals(b.getValue())) {
-                return b.getValue() - a.getValue(); // higher freq first
+        PriorityQueue<Map.Entry<String,Integer>> pq=new PriorityQueue<>((a,b)->{
+            if(!a.getValue().equals(b.getValue())){
+                return b.getValue()-a.getValue();
             }
-            return a.getKey().compareTo(b.getKey()); // lexicographically smaller first
+            return a.getKey().compareTo(b.getKey());
         });
-        for (Map.Entry<String, Integer> e : hm.entrySet()) {
-            pq.add(e);
+
+        for(Map.Entry<String,Integer> entry : hm.entrySet()){
+            pq.add(entry);
         }
 
-        List<String> li=new ArrayList<>();
-        for(int i=0;i< hm.size() && i<k;i++){
-            if(i<k){
-                li.add(pq.poll().getKey());
-            }
+        List<String> ans=new ArrayList<>();
+        for(int i=0;i<k && !pq.isEmpty();i++){
+            ans.add(pq.poll().getKey());
         }
-        return li;
+        return ans;
     }
 }
