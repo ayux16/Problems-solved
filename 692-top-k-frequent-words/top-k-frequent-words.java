@@ -7,11 +7,11 @@ class Solution {
         }
 
         PriorityQueue<Map.Entry<String, Integer>> pq =  new PriorityQueue<>((a, b) -> {
-                if (!a.getValue().equals(b.getValue())) {
-                    return b.getValue() - a.getValue(); // higher freq first
-                }
-                return a.getKey().compareTo(b.getKey()); // lexicographically smaller first
-            });
+            if (!a.getValue().equals(b.getValue())) {
+                return b.getValue() - a.getValue(); // higher freq first
+            }
+            return a.getKey().compareTo(b.getKey()); // lexicographically smaller first
+        });
         for (Map.Entry<String, Integer> e : hm.entrySet()) {
             pq.add(e);
         }
