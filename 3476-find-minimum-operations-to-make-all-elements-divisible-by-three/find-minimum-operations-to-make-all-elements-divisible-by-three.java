@@ -1,8 +1,9 @@
 class Solution {
     public int minimumOperations(int[] nums) {
         int count=0;
-        for(int i=0;i<nums.length;i++){
-            count+=Math.min(nums[i]%3, 3-(nums[i] % 3));
+        for(int n:nums){
+            int mod=n%3;
+            count+=Math.min(mod,3-mod);
         }
         return count;
     }
