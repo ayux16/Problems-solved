@@ -8,12 +8,6 @@ class Solution {
             ch[t.charAt(i)-'a']--;
             ch[s.charAt(i)-'a']++;
         }
-        if(!check(ch)){
-            return false;
-        }
-        return true;
-    }
-    public boolean check(int ch[]){
         for(int c: ch){
             if(c!=0){
                 return false;
