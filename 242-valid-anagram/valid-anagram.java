@@ -5,8 +5,8 @@ class Solution {
         }
         int ch[]=new int[26];
         for(int i=0;i<s.length();i++){
-            ch[t.charAt(i)-'a']--;
             ch[s.charAt(i)-'a']++;
+            ch[t.charAt(i)-'a']--;
         }
         for(int c: ch){
             if(c!=0){
