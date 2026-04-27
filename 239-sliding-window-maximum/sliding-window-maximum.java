@@ -1,32 +1,30 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         ArrayDeque<Integer> dq=new ArrayDeque<>();
-        List<Integer> li=new ArrayList<>();
+        ArrayList<Integer> ans=new ArrayList<>();
+        int n=nums.length;
         for(int i=0;i<k;i++){
-            while(!dq.isEmpty() && dq.getLast()<nums[i]){
+            while(!dq.isEmpty() && dq.peekLast()<nums[i]){
                 dq.removeLast();
             }
             dq.addLast(nums[i]);
         }
-        li.add(dq.getFirst());
+        ans.add(dq.getFirst());
         int s=1,e=k;
-        while(e<nums.length){
-            if(dq.size()!=0 && dq.getFirst()==nums[s-1]){
+        while(e<n){
+            if(!dq.isEmpty() && dq.peekFirst()==nums[s-1]){
                 dq.removeFirst();
             }
-            while(dq.size()!=0 && dq.getLast()<nums[e]){
+            while(!dq.isEmpty() && dq.peekLast()<nums[e]){
                 dq.removeLast();
             }
             dq.addLast(nums[e]);
-            li.add(dq.getFirst());
-            s++;
+            ans.add(dq.getFirst());
             e++;
+            s++;
         }
-
-        int a[]=new int[li.size()];
-        for(int i=0;i<li.size();i++){
-            a[i]=li.get(i);
-        }
-        return a;
+        return ans.stream()
+                        .mapToInt(Integer :: intValue)
+                            .toArray();
     }
 }
