@@ -1,17 +1,18 @@
 class Solution {
     public String minWindow(String s, String t) {
         int n=s.length();
-        HashMap<Character,Integer> hm=new HashMap<>();
-        for(char num: t.toCharArray()){
-            hm.put(num,hm.getOrDefault(num,0)+1);
+        if(n<t.length()){
+            return "";
+        }
+
+        int i=0,j=0,minWindow=Integer.MAX_VALUE,startIndex=-1;
+        Map<Character,Integer> hm= new HashMap<>();
+        for(char ch: t.toCharArray()){
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
         }
         int freq=hm.size();
-        int l=0;
-        int r=0;
-        int startIndex=-1;
-        int maxWindow=Integer.MAX_VALUE;
-        while(r<n){
-            char ch=s.charAt(r);
+        while(j<n){
+            char ch=s.charAt(j);
             if(hm.containsKey(ch)){
                 hm.put(ch,hm.get(ch)-1);
                 if(hm.get(ch)==0){
@@ -19,23 +20,26 @@ class Solution {
                 }
             }
             while(freq==0){
-                int len=r-l+1;
-                if(len<maxWindow){
-                    maxWindow=len;
-                    startIndex=l;
+                int len=j-i+1;
+               // minWindow=Math.min(len,minWindow);
+                if(len<minWindow){
+                    minWindow=len;
+                    startIndex=i;
                 }
-                ch=s.charAt(l);
+                ch=s.charAt(i);
                 if(hm.containsKey(ch)){
                     hm.put(ch,hm.get(ch)+1);
                     if(hm.get(ch)>0){
                         freq++;
                     }
                 }
-                l++;
+                i++;
             }
-            r++;
+            j++;
         }
-        if(startIndex==-1) return "";
-        return s.substring(startIndex,startIndex+maxWindow);
+        if(startIndex==-1){
+            return "";
+        }
+        return s.substring(startIndex,startIndex+minWindow);
     }
 }
