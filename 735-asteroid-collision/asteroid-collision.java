@@ -1,28 +1,29 @@
 class Solution {
     public int[] asteroidCollision(int[] ast) {
-        ArrayDeque<Integer> al=new ArrayDeque<>();
-        
+        Deque<Integer> dq=new ArrayDeque<>();
         for(int cur: ast){
-            boolean isDestroyed=false;
-            while(!al.isEmpty() && al.peekLast()>0 && cur<0){
-
-                if(al.peekLast()< -cur){
-                    al.removeLast();
+                boolean dead=false;
+                while(!dq.isEmpty() && dq.peekLast()>0 && cur<0){
+                    if(dq.peekLast()< -cur){
+                        dq.removeLast();
+                    }
+                    else if(dq.peekLast()== -cur){
+                        dq.removeLast();
+                        dead=true;
+                        break;
+                    }
+                    else{
+                        dead=true;
+                        break;
+                    }
                 }
-                else if(al.peekLast()== -cur){
-                    al.removeLast();
-                    isDestroyed=true;
-                    break;
-                }
-                else{
-                    isDestroyed=true;
-                    break;
-                }
-            }
-            if(isDestroyed!=true){
-                al.addLast(cur);
-            }
+               if(dead!=true){
+                dq.addLast(cur);
+               }
         }
-        return al.stream().mapToInt(Integer :: intValue).toArray();
-    }
+        return dq.stream().mapToInt(Integer :: intValue).toArray();
+    }    
 }
+/*
+
+*/
