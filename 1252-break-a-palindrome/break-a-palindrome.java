@@ -1,10 +1,10 @@
 class Solution {
-    public String breakPalindrome(String palindrome) {
-        int n=palindrome.length();
+    public String breakPalindrome(String p) {
+        int n=p.length();
         if(n==1){
             return "";
         }
-        char ch[]=palindrome.toCharArray();
+        char ch[]=p.toCharArray();
         for(int i=0;i<n/2;i++){
             if(ch[i]!='a'){
                 ch[i]='a';
