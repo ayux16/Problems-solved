@@ -8,16 +8,15 @@ class Solution {
             if(nums[mid]==target){
                 return mid;
             }
-           if(nums[l]<=nums[mid]){
-                if(nums[l]<=target && nums[mid]>=target){
+            if(nums[l]<=nums[mid]){
+                if(target >=nums[l] && target<nums[mid]){
                     h=mid-1;
-                }
-                else{
+                }else{
                     l=mid+1;
                 }
             }
             else{
-                if(nums[h]>=target && nums[mid]<=target){
+                if(target>nums[mid] && target<=nums[h]){
                     l=mid+1;
                 }
                 else{
