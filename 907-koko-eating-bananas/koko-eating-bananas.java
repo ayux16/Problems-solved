@@ -17,13 +17,13 @@ class Solution {
         return low;
     }
     public boolean check(int nums[],int mid,int hour){
-        int pile=0;
+        int totalBananaAte=0;
         for(int n: nums){
-            pile+=(n+mid-1)/mid;
-            if(pile>hour){
+            totalBananaAte+=(n+mid-1)/mid;
+            if(totalBananaAte > hour){
                 return false;
             }
         }
-        return pile<=hour;
+        return totalBananaAte<=hour;
     }
 }
