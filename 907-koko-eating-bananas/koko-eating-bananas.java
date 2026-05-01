@@ -1,30 +1,30 @@
 class Solution {
-    public int minEatingSpeed(int[] nums, int c) {
-        int l=1;
-        int h=0;
-        int n=nums.length;
-        for(int i:nums){
-            h=Math.max(h,i);
+    public int minEatingSpeed(int[] piles, int h) {
+        int low=1;
+        int high=0;
+        for(int n:piles){
+            high=Math.max(high,n);
         }
-        while(l<=h){
-            int mid=l+(h-l)/2;
-            if(check(mid,nums,c)){
-                h=mid-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(check(piles,mid,h)){
+                high=mid-1;
             }
             else{
-                l=mid+1;
+                low=mid+1;
             }
         }
-        return l;
+        return low;
     }
-    public boolean check(int k, int[] nums, int h) {
-    int time = 0;
+    public boolean check(int nums[],int mid,int hour){
+        int pile=0;
+        for(int n: nums){
+            pile+=(n+mid-1)/mid;
+            if(pile>hour){
+                return false;
+            }
+        }
 
-    for (int pile : nums) {
-        time += (pile + k - 1) / k; // ceil
-        if (time > h) return false; 
+        return pile<=hour;
     }
-    return time <= h;
-}
-    
 }
