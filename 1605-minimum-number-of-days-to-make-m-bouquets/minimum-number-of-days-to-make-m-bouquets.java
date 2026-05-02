@@ -1,39 +1,44 @@
 class Solution {
     public int minDays(int[] bloomDay, int m, int k) {
-       if((long) m * k > bloomDay.length) return -1;
-        if (bloomDay.length < m * k) return -1;
-        int low=Integer.MAX_VALUE;;
-        int high=Integer.MIN_VALUE;
-        for(int n: bloomDay){
-            low=Math.min(n,low);
-            high=Math.max(n,high);
+        int n=bloomDay.length;
+        if((long)m*k >n){
+            return -1;
         }
+        if(n < m*k){
+            return -1;
+        }
+        int low=Integer.MAX_VALUE;
+        int high=Integer.MIN_VALUE;
+        for(int num: bloomDay){
+            low=Math.min(low,num);
+            high=Math.max(high,num);
+        }
+
         while(low<high){
             int mid=low+(high-low)/2;
-            if(check(bloomDay,k,mid)<m){
-                low=mid+1;
+            if(isPossible(bloomDay,k,mid)>=m){
+                high=mid;
             }
             else{
-                high=mid;
+                low=mid+1;
             }
         }
         return low;
     }
-
-    public int check(int[] arr,int k, int mid){
-        int flowerCollected=0,bouquet=0;
-        for(int bou: arr){
-            if(bou<=mid){
-                flowerCollected++;
+    public int isPossible(int arr[], int flower,int mid){
+        int flowerCount=0,bouquetCount=0;
+        for(int flowers : arr){
+            if(flowers <= mid){
+                flowerCount++;
             }
             else{
-                flowerCollected=0;
+                flowerCount=0;
             }
-            if(flowerCollected==k){
-                bouquet++;
-                flowerCollected=0;
+            if(flowerCount==flower){
+                bouquetCount++;
+                flowerCount=0;
             }
         }
-        return bouquet;
+        return bouquetCount;
     }
 }
