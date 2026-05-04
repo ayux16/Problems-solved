@@ -30,11 +30,12 @@ class Solution {
     public ListNode reverse(ListNode head, int k){
         ListNode cur=head;
         ListNode prev=null;
-        while(k--!=0 && cur!=null){
+        while(k!=0 && cur!=null){
             ListNode nn=cur;
             cur=cur.next;
             nn.next=prev;
             prev=nn;
+            k--;
         }
         return prev;
     }
