@@ -4,8 +4,11 @@ class Solution {
         int count=0;
         for(int i=0;i<costs.length;i++){
             if(coins>=costs[i]){
-                coins-=costs[i];
                 count++;
+                coins-=costs[i];
+            }
+            else{
+                break;
             }
         }
         return count;
