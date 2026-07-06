@@ -6,28 +6,30 @@ class Solution {
             low=Math.max(low,n);
             high+=n;
         }
-        while(low<high){
+        while(low<=high){
             int mid=low+(high-low)/2;
             if(check(weights,days,mid)){
-                high=mid;
-            }else{
-            low=mid+1;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
             }
         }
         return low;
     }
-    public boolean check(int weights[],int days,int totalWeight){
-        int DaysCount=1;
+    public boolean check(int []nums, int days, int mid){
         int sum=0;
-        for(int n: weights){
-            if(sum+n > totalWeight){
-                sum=n;
-                DaysCount++;
-            }
-            else{
-                sum+=n;
-            }
+        int day=1;
+        for(int n: nums){
+            if(sum+n>mid){
+                day++;
+                sum=0;
+            } 
+            sum+=n;
         }
-        return DaysCount <= days;
+        if(day<=days){
+                return true;
+            }
+        return false;
     }
 }
