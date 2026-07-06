@@ -1,33 +1,31 @@
 class Solution {
     public int numIslands(char[][] grid) {
-        int n=grid.length;
-        int m=grid[0].length;
-        int count=0;
-        boolean visited[][]=new boolean[n][m];
-        
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(!visited[i][j] && grid[i][j]=='1' && rec(grid,visited,i,j,n,m,0)){
+        int n = grid.length;
+        int m = grid[0].length;
+        int count = 0;
+        boolean visited[][] = new boolean[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (!visited[i][j]
+                        && grid[i][j] == '1'
+                        && rec(grid, visited, i, j, n, m)) {
                     count++;
                 }
             }
         }
         return count;
     }
-    public boolean rec(char nums[][],boolean visited[][],int i,int j,int n,int m,int count){
-        if(i<0 || j<0
-            || i>n-1
-            || j>m-1
-            || visited[i][j]
-            || nums[i][j]=='0'
-        ){
+
+    public boolean rec(char nums[][], boolean visited[][], int i, int j, int n, int m) {
+        if (i < 0 || j < 0 || i > n - 1 || j > m - 1
+                || visited[i][j] || nums[i][j] == '0') {
             return false;
         }
-       visited[i][j]=true;
-       rec(nums,visited,i+1,j,n,m,count++);
-       rec(nums,visited,i-1,j,n,m,count++);
-       rec(nums,visited,i,j-1,n,m,count++);
-       rec(nums,visited,i,j+1,n,m,count++);
-       return true;
+        visited[i][j] = true;
+        rec(nums, visited, i + 1, j, n, m);
+        rec(nums, visited, i - 1, j, n, m);
+        rec(nums, visited, i, j - 1, n, m);
+        rec(nums, visited, i, j + 1, n, m);
+        return true;
     }
 }
