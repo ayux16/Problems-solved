@@ -23,11 +23,7 @@ class Solution {
         {
                 return 0;
         }
-        if(visited[i][j]){
-            return 0;
-        }
         visited[i][j]=true;
-        
         return 
         1+rec(grid,i+1,j,n,m,visited)
         + rec(grid,i-1,j,n,m,visited)
