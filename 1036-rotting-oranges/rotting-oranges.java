@@ -14,15 +14,14 @@ class Solution {
                 }
             }
         }
-        return rec(grid,n,m,q,fresh);
+        return bfs(grid,n,m,q,fresh);
     }
-    public int rec(int grid[][],int n,int m , Queue<int[]> q,int fresh){
-        int count=-1;
-        if(fresh==0){
-            return 0;
-        }
+    public int bfs(int grid[][],int n,int m , Queue<int[]> q,int fresh){
+        int count=0;
+        
         while(!q.isEmpty()){
             int size=q.size();
+            boolean rotted = false;
             while(size>0){
                 int cell[]=q.poll();
                 int i=cell[0];
@@ -31,25 +30,31 @@ class Solution {
                 if(i<n-1 && grid[i+1][j]==1){
                     grid[i+1][j]=2;
                     fresh--;
+                    rotted=true;
                     q.offer(new int[]{i+1, j});
                 }
                 if(i>0 && grid[i-1][j]==1){
                     grid[i-1][j]=2;
                     fresh--;
+                    rotted=true;
                     q.offer(new int[]{i-1, j});
                 }
                 if(j>0 && grid[i][j-1]==1){
                     grid[i][j-1]=2;
                     fresh--;
+                    rotted=true;
                     q.offer(new int[]{i, j-1});
                 }
                 if(j<m-1 && grid[i][j+1]==1){
                     grid[i][j+1]=2;
                     fresh--;
+                    rotted=true;
                     q.offer(new int[]{i, j+1});
                 }size--;
             }
-            count++;
+            if(rotted){
+                count++;
+            }
         }
         return fresh==0 ? count : -1;
     }
