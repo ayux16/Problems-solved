@@ -14,20 +14,19 @@ class Solution {
             ag.get(u).add(v);
             ag.get(v).add(u);
         }
-        dfs(source,destination,visited);
+        dfs(source,visited);
         if(visited[destination]){
             return true;
         }
         return false;
     }
-    public void dfs(int s,int d,boolean []visit){
+    public void dfs(int s,boolean []visit){
         if(visit[s]){
             return;
         }
-
         visit[s]=true;
         for(int n: ag.get(s)){
-            dfs(n,d,visit);
+            dfs(n,visit);
         }
     }
 }
