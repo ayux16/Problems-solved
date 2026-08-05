@@ -8,7 +8,7 @@ class Solution {
             sum+=nums[i];
             int t=sum-k;
             if(hm.containsKey(t)){
-                count+=hm.getOrDefault(t,1);
+                count+=hm.get(t);
             }
             hm.put(sum,hm.getOrDefault(sum,0)+1);
         }
