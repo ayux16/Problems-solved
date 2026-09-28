@@ -1,24 +1,23 @@
 class Solution {
-    public int trap(int[] height) {
+    public int trap(int[] nums) {
         int i=0;
-        int n=height.length;
+        int n=nums.length;
         int j=n-1;
-        int maxLeft=0;
-        int maxRight=0;
-        int ans=0;
+        int maxL=Integer.MIN_VALUE;
+        int maxR=Integer.MIN_VALUE;
+        int water=0;
         while(i<j){
-            maxLeft=Math.max(maxLeft,height[i]);
-            maxRight=Math.max(maxRight,height[j]);
-
-            if(maxLeft<maxRight){
-                ans+=maxLeft-height[i];
+            maxL=Math.max(maxL,nums[i]);
+            maxR=Math.max(maxR,nums[j]);
+            if(maxL<maxR){
+                water+=maxL-nums[i];
                 i++;
             }
             else{
-                ans+=maxRight-height[j];
+                water+=maxR-nums[j];
                 j--;
             }
         }
-        return ans;
+        return water;
     }
 }
