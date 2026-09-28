@@ -3,30 +3,30 @@ class Solution {
         Arrays.sort(nums);
         int n=nums.length;
         List<List<Integer>> ans=new ArrayList<>();
-        for(int i=0;i<n;i++){
-            if(nums[i]>0) break;
-            if(i>0 && nums[i]==nums[i-1]){
+        for(int p1=0;p1<n;p1++){
+            if(p1>0 && p1<n && nums[p1-1]==nums[p1]){
                 continue;
             }
-            int j=i+1;
-            int k=n-1;
-            while(j<k){
-                int sum=nums[i]+nums[j]+nums[k];
-                if(sum<0){
-                    j++;
+            int p2=p1+1;
+            int p3=n-1;
+            while(p2<p3){
+                int sum=nums[p1]+nums[p2]+nums[p3];
+                if(sum>0){
+                    p3--;
                 }
-                else if(sum>0){
-                    k--;
+                else if(sum<0){
+                    p2++;
                 }
                 else if(sum==0){
-                    ans.add(Arrays.asList(nums[i],nums[j],nums[k]));
-                    j++;
-                    k--;
-                    while(j<k && nums[j]==nums[j-1]){
-                        j++;
+                    List<Integer> li=Arrays.asList(nums[p1],nums[p2],nums[p3]);
+                    ans.add(li);
+                    p2++;
+                    p3--;
+                    while(p2<p3 && nums[p2-1]==nums[p2]){
+                        p2++;
                     }
-                    while(j<k && nums[k]==nums[k+1]){
-                        k--;
+                    while(p3>p2 && nums[p3+1]==nums[p3]){
+                        p3--;
                     }
                 }
             }
